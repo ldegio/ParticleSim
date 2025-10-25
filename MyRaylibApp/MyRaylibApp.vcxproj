@@ -36,7 +36,7 @@
   <Import Project="Raylib.props" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <!-- /MDd -->
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
