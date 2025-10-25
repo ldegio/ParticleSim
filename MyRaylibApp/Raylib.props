@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Set this to your raylib root (the folder that contains include/, lib/, bin/) -->
+  <PropertyGroup Label="UserMacros">
+    <RAYLIB_DIR>C:\raylib</RAYLIB_DIR>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Ensure x64 builds by default; can still switch in VS -->
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(RAYLIB_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
+      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(RAYLIB_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;winmm.lib;gdi32.lib;opengl32.lib;kernel32.lib;user32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <!-- Copy raylib.dll next to the EXE if present -->
+      <Command>if exist "$(RAYLIB_DIR)\bin\raylib.dll" copy /Y "$(RAYLIB_DIR)\bin\raylib.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <BuildMacro Include="RAYLIB_DIR">
+      <Value>$(RAYLIB_DIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
